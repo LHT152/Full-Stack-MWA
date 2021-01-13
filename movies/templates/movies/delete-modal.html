@@ -1,0 +1,16 @@
+<div class="modal fade" id="delete-modal-{{movie.id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">
+                   Movie: {{movie.fields.Name}}
+                   <p style="color: green;">CONFIRM DELETING THIS ONE ?</p>
+                </h5>
+                <div class="modal-footer">
+                    <a href="{% url 'delete' movie_id=movie.id %}" class="btn btn-danger">Yes</a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
