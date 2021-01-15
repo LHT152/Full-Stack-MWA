@@ -30,15 +30,11 @@ def create(request):
         if data['Pictures'][0]['url'] == '':
             data['Pictures'][0]['url'] = 'https://www.josco.com.au/wp-content/uploads/2016/05/Image-Unavailable.jpg'
 
-
-
-
-
         try:
             response = AT.insert(data)
             messages.success(request, 'New Movie Added: {}'.format(response['fields'].get('Name')))
         except Exception as e:
-            messages.warning(request, 'Encounter an error when updating the movie: {}'.format(e))
+            messages.warning(request, 'Encounter An Error While Creating The Movie: {}'.format(e))
 
         return redirect("/")
 
@@ -51,22 +47,25 @@ def edit(request, movie_id):
             'Rating': int(request.POST.get("rating")),
             'Notes': request.POST.get("notes"),
         }
+
         try:
             response = AT.update(movie_id, data)
             messages.success(request, 'Movie Edited: {}'.format(response['fields'].get('Name')))
         except Exception as e:
-            messages.warning(request, 'Encounter an error when editing the movie: {}'.format(e))
+            messages.warning(request, 'Encounter An Error While Editing The Movie: {}'.format(e))
 
         return redirect("/")
 
 
 def delete(request, movie_id):
-    Try:
+    try:
         movie_name = AT.get(movie_id)['fields']['Name']
         response = AT.delete(movie_id)
         messages.warning(request, 'Movie Deleted: {}'.format(movie_name))
     except Exception as e:
-        messages.warning('Encounter an error when deleting the movie: {}'.format(e))
+        messages.warning(request, 'Encounter An Error While Deleting The Movie: {}'.format(e))
+
+
 
     return redirect("/")
 
